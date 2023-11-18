@@ -1,0 +1,29 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Shop</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'shop/style.css' %}" />
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-3">
+      <div class="card">
+        <img src="{{product.image}}" class="card-img-top" alt="Product Image" />
+        <div class="card-body">
+          <div class="card-title">{{ product.title }}</div>
+          <div class="card-text">{{ product.price }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock body %}
