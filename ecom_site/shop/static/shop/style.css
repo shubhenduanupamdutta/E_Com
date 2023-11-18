@@ -1,0 +1,17 @@
+.card {
+  height: 60%;
+}
+
+.card img {
+  object-fit: contain;
+  height: 70%;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-text {
+  color: darkgreen;
+  font-weight: bold;
+}
