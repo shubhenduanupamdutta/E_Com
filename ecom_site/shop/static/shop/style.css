@@ -1,5 +1,9 @@
-.card {
-  height: 60%;
+.row.product .col-md-3 {
+  height: 300px;
+}
+
+.row.product .card {
+  height: 100%;
 }
 
 .card img {
