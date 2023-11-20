@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 from .models import Product
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.db.models import Q
 # Create your views here.
 
@@ -31,3 +31,7 @@ class Index(ListView):
         context['products_page'] = context.pop('page_obj')
 
         return context
+
+
+class ProductDetail(DetailView):
+    model = Product
