@@ -1,36 +1,33 @@
-{% extends "shop/base.html" %}
-{% load static %}
-
-{% block head %}
+{% extends "shop/base.html" %} {% load static %} {% block head %}
 <title>Shop</title>
-{% endblock %}
-
-{% block style %}
+{% endblock %} {% block style %}
 <link rel="stylesheet" type="text/css" href="{% static 'shop/style.css' %}" />
-{% endblock %}
+{% endblock %} {% block body %}
 
-{% block body %}
-
-<div class="container gy-0">
-
+<div class="container">
   <div class="row g-0">
     <form class="card" action="" method="get">
       <div class="card-body">
         <div class="row gx-1">
-        <div class="col">
-          <input type="search" name="item_name" class="form-control" placeholder="Search for products"
-                 aria-label="search for products">
+          <div class="col">
+            <input
+              type="search"
+              name="item_name"
+              class="form-control"
+              placeholder="Search for products"
+              aria-label="search for products"
+            />
+          </div>
+          <div class="col-auto">
+            <input type="submit" class="btn btn-success form-control" value="Search" />
+          </div>
         </div>
-        <div class="col-auto">
-          <input type="submit" class="btn btn-success form-control" value="Search">
-        </div>
-      </div>
       </div>
     </form>
   </div>
 
   <div class="row product">
-    {% for product in products %}
+    {% for product in products_page %}
     <div class="col-md-3">
       <div class="card p-2">
         <img src="{{product.image}}" class="card-img-top" alt="Product Image" />
@@ -41,6 +38,74 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+
+  <div class="row mt-4 justify-content-center">
+    <div class="col-auto">
+      <nav aria-label="Page Navigation">
+        <ul id="pageNav" class="pagination mx-auto">
+          {% if search_param == '' %} {% if products_page.has_previous %}
+          <li class="page-item"><a href="?page=1" class="page-link">First</a></li>
+          <li class="page-item">
+            <a href="?page={{ products_page.previous_page_number }}" class="page-link">
+              Previous
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active" aria-current="page">
+            <a href="#" class="page-link"
+              >Page {{ products_page.number }} of {{ products_page.paginator.num_pages }}
+            </a>
+          </li>
+
+          {% if products_page.has_next %}
+          <li class="page-item">
+            <a href="?page={{ products_page.next_page_number }}" class="page-link"> Next </a>
+          </li>
+          <li class="page-item">
+            <a href="?page={{ products_page.paginator.num_pages }}" class="page-link">Last</a>
+          </li>
+          {% endif %} {% else %} {% if products_page.has_previous %}
+          <li class="page-item">
+            <a href="?page=1&item_name={{ search_param }}" class="page-link">First</a>
+          </li>
+          <li class="page-item">
+            <a
+              href="?page={{ products_page.previous_page_number }}&item_name={{ search_param }}"
+              class="page-link"
+            >
+              Previous
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active" aria-current="page">
+            <a href="#" class="page-link"
+              >Page {{ products_page.number }} of {{ products_page.paginator.num_pages }}
+            </a>
+          </li>
+
+          {% if products_page.has_next %}
+          <li class="page-item">
+            <a
+              href="?page={{ products_page.next_page_number }}&item_name={{ search_param }}"
+              class="page-link"
+            >
+              Next
+            </a>
+          </li>
+          <li class="page-item">
+            <a
+              href="?page={{ products_page.paginator.num_pages }}&item_name={{ search_param }}"
+              class="page-link"
+              >Last</a
+            >
+          </li>
+          {% endif %} {% endif %}
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
 {% endblock body %}

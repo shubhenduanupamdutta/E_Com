@@ -8,8 +8,8 @@ from django.db.models import Q
 class Index(ListView):
     model = Product
     template_name = "shop/index.html"
-    context_object_name = "products"
-    paginate_by = 10
+    # context_object_name = "products"
+    paginate_by = 4
 
     def get_queryset(self):
         # Retrieve the search parameter from the request
@@ -28,5 +28,6 @@ class Index(ListView):
 
         # Add the search parameter to the context for use in the template
         context['search_param'] = self.request.GET.get('item_name', '')
+        context['products_page'] = context.pop('page_obj')
 
         return context
