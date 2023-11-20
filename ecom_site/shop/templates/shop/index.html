@@ -35,13 +35,13 @@
         <div class="card-body">
           <div class="card-title">{{ product.title }}</div>
           <div class="card-text">&#8377; {{ product.price }}</div>
-          <br>
+          <br />
           <a
             href="{% url 'product_detail' product.id %}"
             class="text-decoration-none btn btn-success"
             >View</a
           >
-          <a href="#" class="btn btn-warning float-end">Add to Cart</a>
+          <button id="{{ product.id  }}" class="btn btn-warning float-end atc">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -117,4 +117,7 @@
     </div>
   </div>
 </div>
-{% endblock body %}
+{% endblock body %} {% block script %}
+<script type="text/javascript" src="{% static 'shop/script.js' %}"></script>
+
+{% endblock script %}
