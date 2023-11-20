@@ -12,7 +12,7 @@
         <div class="col-md-6">
             <div class="row p-3">
                 <div id="productImage" class="col-md-12 d-flex align-items-center">
-                    <img  src="{{ product.image }}" class="img-fluid" alt="product image" />
+                    <img src="{{ product.image }}" class="img-fluid" alt="product image" />
                 </div>
             </div>
         </div>
@@ -45,4 +45,9 @@
     </div>
 </div>
 
-{% endblock %} {{ product.title }} {{ product.price }} {{ product.description }} {{ product.image }}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{% static 'shop/script.js' %}"></script>
+
+{% endblock script %}
