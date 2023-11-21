@@ -40,7 +40,8 @@ class ProductDetail(DetailView):
 def checkout(request):
 
     if request.method == "POST":
-        fields = ['name', 'email', 'address', 'city', 'state', 'zip_code']
+        fields = ['items', 'name', 'email',
+                  'address', 'city', 'state', 'zip_code']
         data = {field: request.POST.get(field, "") for field in fields}
 
         order = Order(**data)

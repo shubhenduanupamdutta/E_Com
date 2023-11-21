@@ -72,3 +72,8 @@ for (item in cart) {
     list.appendChild(list_item);
   }
 }
+
+let order_items = document.getElementById("items");
+if (!(order_items == null)) {
+  order_items.value = JSON.stringify(cart);
+}
