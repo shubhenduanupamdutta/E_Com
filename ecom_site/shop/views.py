@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Order, Product
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 # Create your views here.
@@ -38,4 +38,12 @@ class ProductDetail(DetailView):
 
 
 def checkout(request):
+
+    if request.method == "POST":
+        fields = ['name', 'email', 'address', 'city', 'state', 'zip_code']
+        data = {field: request.POST.get(field, "") for field in fields}
+
+        order = Order(**data)
+        order.save()
+
     return render(request, 'shop/checkout.html')
