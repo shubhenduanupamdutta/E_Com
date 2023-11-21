@@ -25,5 +25,6 @@ urlpatterns = [
         views.ProductDetail.as_view(),
         name='product_detail'
     ),
+    path('checkout/', views.checkout, name="checkout"),
     path('admin/', admin.site.urls),
 ]

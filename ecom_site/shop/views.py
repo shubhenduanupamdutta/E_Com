@@ -1,4 +1,4 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from .models import Product
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
@@ -35,3 +35,7 @@ class Index(ListView):
 
 class ProductDetail(DetailView):
     model = Product
+
+
+def checkout(request):
+    return render(request, 'shop/checkout.html')
