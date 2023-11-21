@@ -13,3 +13,13 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.category}"
+
+
+class Order(models.Model):
+    items = models.CharField(max_length=3000)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    address = models.CharField(max_length=1000)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
