@@ -3,10 +3,8 @@ let cart = {};
 let item_name = {};
 if (localStorage.getItem("cart") == null) {
   cart = {};
-  item_name = {};
 } else {
   cart = JSON.parse(localStorage.getItem("cart"));
-  item_name = JSON.parse(localStorage.getItem("item_name"));
 }
 
 document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
@@ -19,11 +17,9 @@ document.querySelectorAll(".atc").forEach((button) => {
     let productName = document.getElementById("nm" + productId).innerHTML;
     console.log(productId + " clicked");
     if (cart[productId] != undefined) {
-      cart[productId] += 1;
-      item_name[productId] = productName;
+      cart[productId][0] += 1;
     } else {
-      cart[productId] = 1;
-      if (!item_name.hasOwnProperty(productId)) item_name[productId] = productName;
+      cart[productId] = [1, productName];
     }
     console.log(cart);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -41,7 +37,7 @@ function DisplayCart(cart) {
   var cartIndex = 1;
   for (let x in cart) {
     cartString += cartIndex + ". ";
-    cartString += item_name[x] + " Qty: " + cart[x] + "<br>";
+    cartString += cart[x][1] + " Qty: " + cart[x][0] + "<br>";
     cartIndex++;
   }
   cartString += "<br><a href='/checkout' class='btn btn-success'>Checkout</a><br>";
@@ -54,10 +50,9 @@ const popoverList = [...popoverTriggerList].map(function (popoverTriggerEl) {
 });
 
 for (item in cart) {
-  let productName = item_name[item];
-  let quantity = cart[item];
-  let list = document.getElementById("checkoutList");
-  if (!(list == null)) {
+  let productName = cart[item][1];
+  let quantity = cart[item][0];
+  if (!(document.getElementById("checkoutList") == null)) {
     let item_str = `${productName}
   <span class="badge bg-primary rounded-pill">${quantity}</span>`;
     let list_item = document.createElement("li");
@@ -69,11 +64,10 @@ for (item in cart) {
     );
 
     list_item.innerHTML = item_str;
-    list.appendChild(list_item);
+    (document.getElementById("checkoutList")).appendChild(list_item);
   }
 }
 
-let order_items = document.getElementById("items");
-if (!(order_items == null)) {
-  order_items.value = JSON.stringify(cart);
+if (!(document.getElementById("items") == null)) {
+  (document.getElementById("items")).value = JSON.stringify(cart);
 }
