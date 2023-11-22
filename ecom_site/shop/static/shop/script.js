@@ -15,16 +15,21 @@ document.querySelectorAll(".atc").forEach((button) => {
   button.addEventListener("click", (event) => {
     let productId = event.target.id;
     let productName = document.getElementById("nm" + productId).innerHTML;
+    let productPriceStr = document.getElementById("price" + productId).innerHTML;
+    let productPrice = parseFloat(productPriceStr.split(" ")[1])
     console.log(productId + " clicked");
+    console.log(productName, productPrice);
     if (cart[productId] != undefined) {
       cart[productId][0] += 1;
+      cart[productId][2] += productPrice;
     } else {
-      cart[productId] = [1, productName];
+      cart[productId] = [1, productName, productPrice];
     }
     console.log(cart);
     localStorage.setItem("cart", JSON.stringify(cart));
     localStorage.setItem("item_name", JSON.stringify(item_name));
     console.log("cart updated");
+    // console.log(productPrice, typeof productPrice);
     document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
     DisplayCart(cart);
     // console.log(Object.keys(cart).length);
@@ -52,6 +57,7 @@ const popoverList = [...popoverTriggerList].map(function (popoverTriggerEl) {
 for (item in cart) {
   let productName = cart[item][1];
   let quantity = cart[item][0];
+  let price = cart[item][2];
   if (!(document.getElementById("checkoutList") == null)) {
     let item_str = `${productName}
   <span class="badge bg-primary rounded-pill">${quantity}</span>`;
@@ -64,10 +70,10 @@ for (item in cart) {
     );
 
     list_item.innerHTML = item_str;
-    (document.getElementById("checkoutList")).appendChild(list_item);
+    document.getElementById("checkoutList").appendChild(list_item);
   }
 }
 
 if (!(document.getElementById("items") == null)) {
-  (document.getElementById("items")).value = JSON.stringify(cart);
+  document.getElementById("items").value = JSON.stringify(cart);
 }

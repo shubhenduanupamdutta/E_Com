@@ -34,7 +34,7 @@
         <img src="{{product.image}}" class="card-img-top" alt="Product Image" />
         <div class="card-body">
           <div id="nm{{product.id}}" class="card-title">{{ product.title }}</div>
-          <div class="card-text">&#8377; {{ product.price }}</div>
+          <div id="price{{product.id}}" class="card-text">&#8377; {{ product.price }}</div>
           <br />
           <a
             href="{% url 'product_detail' product.id %}"
