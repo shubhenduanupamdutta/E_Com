@@ -1,4 +1,19 @@
 // console.log("This is working...");
+var messages = document.querySelector('.messages');
+if (messages) {
+  var backendSuccessMessage = Array.from(messages.children).find(function (message) {
+    return message.textContent.trim() === 'Order placed successfully!';
+  });
+
+  // If the message is found, clear local storage
+  if (backendSuccessMessage) {
+    console.log('Clearing local storage...')
+    
+    localStorage.clear();
+    console.log('Local storage cleared.');
+  }
+}
+
 let cart = {};
 let item_name = {};
 if (localStorage.getItem("cart") == null) {
@@ -78,7 +93,7 @@ for (item in cart) {
     create_checkout_list_item("of " + productName, quantity, price);
   }
 }
-if (Object.keys(cart).length > 0) {
+if (Object.keys(cart).length > 0 && !(document.getElementById("checkoutList") == null)) {
   create_checkout_list_item("Your Total Cart Value", "", total);
 }
 
@@ -90,8 +105,3 @@ if (!(document.getElementById("total-price") == null)) {
   document.getElementById("total-price").value = total;
 }
 
-// let messages = document.querySelectorAll(".messages");
-// if (messages) {
-//   console.log(messages, "messages");
-//   console.log('messages', typeof messages);
-// }
