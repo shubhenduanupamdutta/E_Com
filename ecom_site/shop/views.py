@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
 from .models import Order, Product
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
@@ -46,5 +47,7 @@ def checkout(request):
 
         order = Order(**data)
         order.save()
+        messages.success(request, "Order placed successfully!")
+        return redirect('index')
 
     return render(request, 'shop/checkout.html')
