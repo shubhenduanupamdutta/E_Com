@@ -41,7 +41,7 @@ def checkout(request):
 
     if request.method == "POST":
         fields = ['items', 'name', 'email',
-                  'address', 'city', 'state', 'zip_code']
+                  'address', 'city', 'state', 'zip_code', 'total_price']
         data = {field: request.POST.get(field, "") for field in fields}
 
         order = Order(**data)

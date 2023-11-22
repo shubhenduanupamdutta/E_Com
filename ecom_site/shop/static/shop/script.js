@@ -16,7 +16,7 @@ document.querySelectorAll(".atc").forEach((button) => {
     let productId = event.target.id;
     let productName = document.getElementById("nm" + productId).innerHTML;
     let productPriceStr = document.getElementById("price" + productId).innerHTML;
-    let productPrice = parseFloat(productPriceStr.split(" ")[1])
+    let productPrice = parseFloat(productPriceStr.split(" ")[1]);
     console.log(productId + " clicked");
     console.log(productName, productPrice);
     if (cart[productId] != undefined) {
@@ -82,7 +82,10 @@ if (Object.keys(cart).length > 0) {
   create_checkout_list_item("Your Total Cart Value", "", total);
 }
 
-
 if (!(document.getElementById("items") == null)) {
   document.getElementById("items").value = JSON.stringify(cart);
+}
+
+if (!(document.getElementById("total-price") == null)) {
+  document.getElementById("total-price").value = total;
 }
