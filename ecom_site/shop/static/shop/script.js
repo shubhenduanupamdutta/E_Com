@@ -89,3 +89,9 @@ if (!(document.getElementById("items") == null)) {
 if (!(document.getElementById("total-price") == null)) {
   document.getElementById("total-price").value = total;
 }
+
+// let messages = document.querySelectorAll(".messages");
+// if (messages) {
+//   console.log(messages, "messages");
+//   console.log('messages', typeof messages);
+// }
