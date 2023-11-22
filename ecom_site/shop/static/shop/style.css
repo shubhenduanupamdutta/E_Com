@@ -32,3 +32,40 @@
   object-fit: contain;
   max-height: 100%;
 }
+
+ul#checkoutList {
+  font-size: 1.5rem;
+}
+
+#checkoutList li:last-child {
+  font-weight: bold;
+  background-color: lightblue;
+}
+
+/* Base Divider class */
+.divider {
+  display: flex;
+
+  &:before,
+  &:after {
+    content: "";
+    flex: 1;
+  }
+}
+
+.glow {
+  &:before,
+  &:after {
+    height: 6px;
+    --webkit-filter: blur(5px);
+    border-radius: 5px;
+  }
+
+  &:before {
+    background: linear-gradient(to right, blue, hotpink);
+  }
+
+  &:after {
+    background: linear-gradient(to left, blue, hotpink);
+  }
+}
