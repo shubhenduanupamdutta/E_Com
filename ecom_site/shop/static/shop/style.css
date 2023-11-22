@@ -1,6 +1,6 @@
-/* body {
-  background-color: #0e4a86;
-} */
+body {
+  background-color: rgb(229, 239, 236);
+}
 
 .row.product .col-md-3 {
   height: 500px;
@@ -24,6 +24,18 @@
   font-weight: bold;
 }
 
+nav.navbar {
+  background-color: aliceblue !important;
+}
+
+nav .navbar-brand:hover {
+  transform: scale(1.2);
+}
+
+.nav-item {
+  margin: 0 10px;
+}
+
 #productImage {
   height: 70vh;
 }
@@ -42,6 +54,9 @@ ul#checkoutList {
   background-color: lightblue;
 }
 
+#addressForm {
+  background-color: rgb(206, 224, 218);
+}
 /* Base Divider class */
 .divider {
   display: flex;
