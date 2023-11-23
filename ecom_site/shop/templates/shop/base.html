@@ -30,6 +30,7 @@
       href="{% static 'favicon/favicon-16x16.png' %}"
     />
     <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}" />
   </head>
 
   <body>
@@ -73,6 +74,15 @@
                     Cart(0)
                   </button>
                 </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                <li class="nav-item">
+                  <a href="{% url 'register' %}" class="nav-link"> Register </a>
+                </li>
+                {% endif %}
               </ul>
             </div>
           </div>
