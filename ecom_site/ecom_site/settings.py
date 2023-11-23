@@ -17,19 +17,19 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # STRIPE SETTINGS
-STRIPE_PUBLISHABLE_KEY = os.environ["STRIPE_PUBLISHABLE_KEY"]
-STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
-BACKEND_DOMAIN = os.environ["BACKEND_DOMAIN"]
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+BACKEND_DOMAIN = os.environ.get("BACKEND_DOMAIN")
 STRIPE_SUCCESS_URL = f"{BACKEND_DOMAIN}/success/"
 STRIPE_CANCEL_URL = f"{BACKEND_DOMAIN}/cancel/"
-STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 # EMAIL SETTINGS
-EMAIL_HOST = os.environ["EMAIL_HOST"]
-EMAIL_PORT = os.environ["EMAIL_PORT"]
-EMAIL_HOST_USER = os.environ["EMAIL_USER"]
-EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
-VENDOR_EMAIL = os.environ["VENDOR_EMAIL"]
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+VENDOR_EMAIL = os.environ.get("VENDOR_EMAIL")
 EMAIL_USE_TLS = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,10 +40,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = f'{os.environ["SECRET_KEY"]}'
+SECRET_KEY = f'{os.environ.get("SECRET_KEY")}'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ["DEBUG"] == "True"
+DEBUG = os.environ.get("DEBUG") == "True"
 
 ALLOWED_HOSTS = []
 
