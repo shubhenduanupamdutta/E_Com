@@ -1,16 +1,16 @@
 // console.log("This is working...");
-var messages = document.querySelector('.messages');
+var messages = document.querySelector(".messages");
 if (messages) {
   var backendSuccessMessage = Array.from(messages.children).find(function (message) {
-    return message.textContent.trim() === 'Order placed successfully!';
+    return message.textContent.trim() === "Your order has been placed successfully!";
   });
 
   // If the message is found, clear local storage
   if (backendSuccessMessage) {
-    console.log('Clearing local storage...')
-    
+    console.log("Clearing local storage...");
+
     localStorage.clear();
-    console.log('Local storage cleared.');
+    console.log("Local storage cleared.");
   }
 }
 
@@ -104,4 +104,3 @@ if (!(document.getElementById("items") == null)) {
 if (!(document.getElementById("total-price") == null)) {
   document.getElementById("total-price").value = total;
 }
-
