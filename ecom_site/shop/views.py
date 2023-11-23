@@ -65,3 +65,45 @@ def checkout(request):
 
 class StripeCheckoutSession(View):
     """Stripe Checkout View"""
+
+    def get(self, request, order_id):
+        order = Order.objects.get(pk=order_id)
+        # print(order.id, order)
+
+        checkout_session = stripe.checkout.Session.create(
+            currency="inr",
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "inr",
+                        "unit_amount": int(order.total_price * 100),  # type: ignore # noqa
+                        "product_data": {
+                            "name": order.items,
+                        }
+                    },
+                    "quantity": 1,
+                }
+            ],
+            metadata={
+                "order_id": order_id,
+                "order_details": order.items,
+                "order_for": order.name,
+            },
+            mode="payment",
+            success_url=settings.STRIPE_SUCCESS_URL,
+            cancel_url=settings.STRIPE_CANCEL_URL,
+        )
+        return redirect(checkout_session.url)
+
+
+def success(request):
+    print(request.POST)
+    print(request.GET)
+    messages.success(request, "Your order has been placed successfully!")
+    return redirect('index')
+
+
+def cancel(request):
+    messages.error(request, "Your order has been cancelled!")
+    return redirect('checkout')
