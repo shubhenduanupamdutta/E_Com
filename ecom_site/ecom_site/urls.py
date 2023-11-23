@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shop import views  # type: ignore
-from users import views as user_views  # type: ignore
+from shop import views  
+from users import views as user_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
