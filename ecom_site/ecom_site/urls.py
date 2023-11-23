@@ -27,6 +27,8 @@ urlpatterns = [
         views.ProductDetail.as_view(),
         name='product_detail'
     ),
+    path('stripe-checkout-session/<int:order_id>/',
+         views.StripeCheckoutSession.as_view(), name="stripe_checkout"),
     path('register/', user_views.register, name="register"),
     path('login/', user_views.CustomLoginView.as_view(
         template_name="users/login.html"), name="login"),
