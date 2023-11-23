@@ -52,9 +52,13 @@ def checkout(request):
         fields = ['items', 'name', 'email',
                   'address', 'city', 'state', 'zip_code', 'total_price']
         data = {field: request.POST.get(field, "") for field in fields}
-
-        order = Order(**data)
+        if int(data['total_price']) == 0:
+            messages.error(request, "Your cart is empty!")
+            return redirect('index')
+        order = Order(**data, payment_done=False)
         order.save()
+        order.refresh_from_db()
+        print(order.id)  # type: ignore
         messages.success(request, "Order placed successfully!")
         return redirect('index')
 

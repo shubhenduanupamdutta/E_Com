@@ -44,6 +44,10 @@ nav .navbar-brand:hover {
   margin: 0 10px;
 }
 
+.alert-error {
+  background-color: lightcoral !important;
+}
+
 #productImage {
   height: 70vh;
 }
