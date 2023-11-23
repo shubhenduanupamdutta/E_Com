@@ -1,4 +1,5 @@
 from django.core.mail import send_mass_mail
+from django.conf import settings
 from .models import Order
 import json
 
@@ -30,6 +31,7 @@ def send_order_email(order: Order):
     message_v += "Payment done in full"
     address = f"{order.address}, {order.city}, {order.state}, {order.zip_code}"
     message_v += f"\nShipping Address: {address}\n\n"
+    mail_to_v = [settings.VENDOR_EMAIL]
     message1 = (
         subject_c,
         message_c,
@@ -40,6 +42,6 @@ def send_order_email(order: Order):
         subject_v,
         message_v,
         from_mail,
-        ["gappudutta@gmail.com"],
+        mail_to_v,
     )
     send_mass_mail([message1, message2], fail_silently=False)
