@@ -58,9 +58,7 @@ def checkout(request):
         order = Order(**data, payment_done=False)
         order.save()
         order.refresh_from_db()
-        print(order.id)  # type: ignore
-        messages.success(request, "Order placed successfully!")
-        return redirect('index')
+        return redirect('stripe_checkout', order_id=order.id)  # type: ignore
 
     return render(request, 'shop/checkout.html')
 
