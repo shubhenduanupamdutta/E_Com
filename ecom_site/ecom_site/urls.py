@@ -38,4 +38,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('success/', views.success, name="success"),
     path('cancel/', views.cancel, name="cancel"),
+    path('stripe-webhook',
+         views.StripeWebhookView.as_view(), name="webhook"),
 ]

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 import stripe
@@ -7,6 +8,9 @@ from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+import json
 # Create your views here.
 
 
@@ -69,6 +73,10 @@ class StripeCheckoutSession(View):
     def get(self, request, order_id):
         order = Order.objects.get(pk=order_id)
         # print(order.id, order)
+        order_detail = json.loads(order.items)
+        order_name = ""
+        for value in order_detail.values():
+            order_name += f"{value[1]}: Qty: {value[0]} - {value[2]}\n"
 
         checkout_session = stripe.checkout.Session.create(
             currency="inr",
@@ -79,7 +87,7 @@ class StripeCheckoutSession(View):
                         "currency": "inr",
                         "unit_amount": int(order.total_price * 100),  # type: ignore # noqa
                         "product_data": {
-                            "name": order.items,
+                            "name": order_name,
                         }
                     },
                     "quantity": 1,
@@ -98,8 +106,6 @@ class StripeCheckoutSession(View):
 
 
 def success(request):
-    print(request.POST)
-    print(request.GET)
     messages.success(request, "Your order has been placed successfully!")
     return redirect('index')
 
@@ -107,3 +113,41 @@ def success(request):
 def cancel(request):
     messages.error(request, "Your order has been cancelled!")
     return redirect('checkout')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class StripeWebhookView(View):
+    """
+    Stripe Webhook View to handle checkout.session.completed event
+    """
+
+    def post(self, request, format=None):
+        print("Webhook triggered")
+        payload = request.body
+        endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
+        sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+        event = None
+        try:
+            event = stripe.Webhook.construct_event(  # type: ignore
+                payload, sig_header, endpoint_secret
+            )
+        except ValueError as e:
+            # Invalid payload
+            print(e)
+            return HttpResponse(status=400)
+        except stripe.error.SignatureVerificationError as e:  # type: ignore
+            # Invalid signature
+            print(e)
+            return HttpResponse(status=400)
+
+        if event["type"] == "checkout.session.completed":
+            session = event["data"]["object"]
+            order_id = session["metadata"]["order_id"]
+            order = Order.objects.get(pk=order_id)
+            order.payment_done = True
+            order.save()
+            order.refresh_from_db()
+            print("Payment was successful.")
+            
+
+        return HttpResponse(status=200)
