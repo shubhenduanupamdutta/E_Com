@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from .models import Order, Product
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -38,6 +39,7 @@ class ProductDetail(DetailView):
     model = Product
 
 
+@login_required
 def checkout(request):
 
     if request.method == "POST":
