@@ -1,0 +1,10 @@
+{% extends "food/base.html" %} {% block body %}
+<div class="container text-center mt-3">
+  <div class="row">
+    <div class="col-md-12 col-lg-4 offset-lg-4">
+      <h2>You have been logged out</h2>
+      <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Home</a>
+    </div>
+  </div>
+</div>
+{% endblock body %}
