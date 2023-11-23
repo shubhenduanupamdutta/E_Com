@@ -11,6 +11,7 @@ from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .send_mail import send_order_email
 # Create your views here.
 
 
@@ -148,6 +149,6 @@ class StripeWebhookView(View):
             order.save()
             order.refresh_from_db()
             print("Payment was successful.")
-            
+            send_order_email(order)
 
         return HttpResponse(status=200)
