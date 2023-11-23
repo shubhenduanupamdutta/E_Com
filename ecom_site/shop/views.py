@@ -1,10 +1,16 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
+from django.views import View
+import stripe
 from .models import Order, Product
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 # Create your views here.
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class Index(ListView):
@@ -53,3 +59,7 @@ def checkout(request):
         return redirect('index')
 
     return render(request, 'shop/checkout.html')
+
+
+class StripeCheckoutSession(View):
+    """Stripe Checkout View"""
