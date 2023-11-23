@@ -28,7 +28,7 @@ nav.navbar {
   background-color: aliceblue !important;
   font-size: 1.3rem;
   font-weight: bold;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 nav .navbar-brand {
@@ -57,13 +57,21 @@ nav .navbar-brand:hover {
   max-height: 100%;
 }
 
+button.atc {
+  transition: background-color 0.3s ease;
+}
+
+button.atc:active {
+  background-color: rgb(164, 153, 34) !important;
+}
+
 ul#checkoutList {
   font-size: 1.5rem;
 }
 
 #checkoutList li:last-child {
   font-weight: bold;
-  background-color: lightblue;
+  background-color: lightblue !important;
 }
 
 #addressForm {
@@ -97,14 +105,13 @@ ul#checkoutList {
   }
 }
 
-
 div#page-container {
   position: relative;
   min-height: 100vh;
 }
 
 main#content-wrap {
-  padding-bottom: 4rem;    /* Footer height */
+  padding-bottom: 4rem; /* Footer height */
 }
 
 footer#footer {
@@ -116,7 +123,7 @@ footer#footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 4rem;            /* Footer height */
+  height: 4rem; /* Footer height */
 }
 
 footer#footer p {
@@ -138,4 +145,3 @@ footer#footer p {
 #footer div.build-description {
   font-size: 0.9rem;
 }
-
