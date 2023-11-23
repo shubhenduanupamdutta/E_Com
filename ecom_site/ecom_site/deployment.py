@@ -3,9 +3,9 @@ from .settings import *  # noqa
 from .settings import BASE_DIR
 
 SECRET_KEY = os.environ["SECRET_KEY"]
-ALLOWED_HOSTS = [os.environ["WEBSITE_HOSTNAME"]]
-CSRF_TRUSTED_ORIGINS = [os.environ["WEBSITE_HOSTNAME"]]
-print(CSRF_TRUSTED_ORIGINS)
+ALLOWED_HOSTS = ["*"]
+# CSRF_TRUSTED_ORIGINS = [os.environ["WEBSITE_HOSTNAME"]]
+# print(CSRF_TRUSTED_ORIGINS)
 DEBUG = False
 
 INSTALLED_APPS = [
