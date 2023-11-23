@@ -3,6 +3,11 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-4 offset-md-4">
+      {% if form.non_field_errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %} {{ error }} {% endfor %}
+      </div>
+      {% endif %}
       <div class="card">
         <div class="card-header text-center bg-info text-white">
           <div class="card-title">Login Form</div>
@@ -12,6 +17,16 @@
             {% csrf_token %} {% for field in form %}
             <div class="form-group mb-4">{{ field.name|capfirst }} {{ field }}</div>
             {% endfor %}
+            <!-- Starting Errors -->
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+              {% for field, errors in form.errors.items %}
+              <!-- Nothing here -->
+              {% for error in errors %} {{ field|capfirst }}: {{ error }}
+              <br />
+              {% endfor %} {% endfor %}
+            </div>
+            {% endif %}
             <input type="submit" class="btn btn-info" value="Login" />
           </form>
         </div>
