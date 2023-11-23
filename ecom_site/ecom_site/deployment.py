@@ -6,7 +6,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 ALLOWED_HOSTS = ["*"]
 # CSRF_TRUSTED_ORIGINS = [os.environ["WEBSITE_HOSTNAME"]]
 # print(CSRF_TRUSTED_ORIGINS)
-DEBUG = False
+DEBUG = True
 
 INSTALLED_APPS = [
     'shop',
