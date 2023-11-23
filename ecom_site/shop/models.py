@@ -25,6 +25,7 @@ class Order(models.Model):
     zip_code = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     total_price = models.FloatField()
+    payment_done = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name} - {self.items}"
