@@ -17,7 +17,10 @@ load_dotenv()
 
 STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
-
+BACKEND_DOMAIN = os.environ.get("BACKEND_DOMAIN")
+STRIPE_SUCCESS_URL = f"{BACKEND_DOMAIN}/success/"
+STRIPE_CANCEL_URL = f"{BACKEND_DOMAIN}/cancel/"
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
