@@ -36,4 +36,6 @@ urlpatterns = [
         template_name="users/logout.html"), name="logout"),
     path('checkout/', views.checkout, name="checkout"),
     path('admin/', admin.site.urls),
+    path('success/', views.success, name="success"),
+    path('cancel/', views.cancel, name="cancel"),
 ]
