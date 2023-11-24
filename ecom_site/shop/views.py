@@ -154,4 +154,4 @@ class StripeWebhookView(View):
 
             message += "<h2>Order Completed on {{ order.created_at }}</h2>"
 
-        return HttpResponse(message)
+        return HttpResponse(status=200)
