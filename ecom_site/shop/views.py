@@ -142,7 +142,8 @@ class StripeWebhookView(View):
 
         if event["type"] == "checkout.session.completed":
             session = event["data"]["object"]
-            order_id = session["metadata"]["order_id"]
+            order_id = int(session["metadata"]["order_id"])
+            print(order_id)
             order = Order.objects.get(pk=order_id)
             order.payment_done = True
             order.save()
@@ -153,4 +154,7 @@ class StripeWebhookView(View):
             print("Email Sent!")
 
         print("Just before HttpResponse")
+        print(f"{event['type']}")
+        msg = "production" if len(endpoint_secret) == 38 else "development"
+        print(f"In {msg} mode")
         return HttpResponse(status=200)
