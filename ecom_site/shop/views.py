@@ -32,7 +32,7 @@ class Index(ListView):
         query = Q(title__icontains=search_param)
         query = query | Q(category__icontains=search_param)
         query = query | Q(description__icontains=search_param)
-        queryset = Product.objects.filter(query)
+        queryset = Product.objects.filter(query).order_by('-id')
 
         return queryset
 

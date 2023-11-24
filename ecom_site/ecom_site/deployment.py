@@ -6,7 +6,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 ALLOWED_HOSTS = ["*"]
 # CSRF_TRUSTED_ORIGINS = [os.environ["WEBSITE_HOSTNAME"]]
 # print(CSRF_TRUSTED_ORIGINS)
-DEBUG = True
+DEBUG = False
 
 INSTALLED_APPS = [
     'shop',
@@ -38,7 +38,7 @@ DATABASES = {
 # STRIPE SETTINGS
 STRIPE_PUBLISHABLE_KEY = os.environ["STRIPE_PUBLISHABLE_KEY"]
 STRIPE_SECRET_KEY = os.environ["STRIPE_SECRET_KEY"]
-BACKEND_DOMAIN = os.environ["BACKEND_DOMAIN"]
+BACKEND_DOMAIN = os.environ["WEBSITE_HOSTNAME"]
 STRIPE_SUCCESS_URL = f"{BACKEND_DOMAIN}/success/"
 STRIPE_CANCEL_URL = f"{BACKEND_DOMAIN}/cancel/"
 STRIPE_WEBHOOK_SECRET = os.environ["STRIPE_WEBHOOK_SECRET"]
@@ -51,17 +51,6 @@ EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 VENDOR_EMAIL = os.environ["VENDOR_EMAIL"]
 EMAIL_USE_TLS = True
 
-
-INSTALLED_APPS = [
-    'shop',
-    'users',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
 
 ROOT_URLCONF = 'ecom_site.urls'
 
@@ -123,6 +112,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "login"
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
