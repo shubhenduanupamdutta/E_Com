@@ -5,6 +5,7 @@ from .models import Order
 import json
 
 
+
 def send_order_email(order: Order):
     print("Creating mail to customer and vendor")
     # Email to customer
@@ -69,4 +70,7 @@ def send_order_email(order: Order):
             msg["Subject"] = message[0]
             msg["To"] = message[3]
             msg["From"] = message[2]
-            connection.send_message(msg)
+            try:
+                connection.send_message(msg)
+            except Exception as e:
+                print(e)
