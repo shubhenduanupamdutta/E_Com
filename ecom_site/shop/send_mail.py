@@ -5,7 +5,6 @@ from .models import Order
 import json
 
 
-
 def send_order_email(order: Order):
     print("Creating mail to customer and vendor")
     # Email to customer

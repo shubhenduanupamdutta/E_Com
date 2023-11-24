@@ -150,8 +150,11 @@ class StripeWebhookView(View):
             order.refresh_from_db()
             print("Payment was successful.")
             print("calling send_order_email from webhook")
-            send_order_email(order)
-            print("Email Sent!")
+            try:
+                send_order_email(order)
+                print("Email Sent!")
+            except Exception as e:
+                print(e)
 
         print("Just before HttpResponse")
         print(f"{event['type']}")
