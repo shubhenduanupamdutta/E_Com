@@ -14,7 +14,6 @@ import json
 from .send_mail import send_order_email
 # Create your views here.
 
-
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -128,7 +127,6 @@ class StripeWebhookView(View):
         endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         event = None
-        print(f"{endpoint_secret} \n {sig_header} \n {event}")
         try:
             event = stripe.Webhook.construct_event(  # type: ignore
                 payload, sig_header, endpoint_secret
@@ -142,6 +140,8 @@ class StripeWebhookView(View):
             print(e)
             return HttpResponse(status=400)
 
+        message = "<h1>" + event["type"] + "</h1><br>"
+
         if event["type"] == "checkout.session.completed":
             session = event["data"]["object"]
             order_id = session["metadata"]["order_id"]
@@ -152,4 +152,6 @@ class StripeWebhookView(View):
             print("Payment was successful.")
             send_order_email(order)
 
-        return HttpResponse(status=200)
+            message += "<h2>Order Completed on {{ order.created_at }}</h2>"
+
+        return HttpResponse(message)
