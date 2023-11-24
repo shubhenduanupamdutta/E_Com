@@ -140,8 +140,6 @@ class StripeWebhookView(View):
             print(e)
             return HttpResponse(status=400)
 
-        message = "<h1>" + event["type"] + "</h1><br>"
-
         if event["type"] == "checkout.session.completed":
             session = event["data"]["object"]
             order_id = session["metadata"]["order_id"]
@@ -150,8 +148,9 @@ class StripeWebhookView(View):
             order.save()
             order.refresh_from_db()
             print("Payment was successful.")
+            print("calling send_order_email from webhook")
             send_order_email(order)
+            print("Email Sent!")
 
-            message += "<h2>Order Completed on {{ order.created_at }}</h2>"
-
+        print("Just before HttpResponse")
         return HttpResponse(status=200)

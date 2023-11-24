@@ -5,6 +5,7 @@ import json
 
 
 def send_order_email(order: Order):
+    print("Creating mail to customer and vendor")
     # Email to customer
     subject_c = "Thank you for your purchase!"
     message_c = f"Hi {order.name},\n\n"
@@ -16,9 +17,12 @@ def send_order_email(order: Order):
     message_c += "Thanks again for your purchase!\n"
     message_c += "The Ecom Site Team"
     mail_to_c = [order.email]
-    from_mail = "shubhenduanupam@outlook.com"
+    print("Mail to customer created")
+
+    from_mail = settings.EMAIL_HOST_USER
 
     # Email to vendor
+    print("Creating mail to vendor")
     subject_v = "New Order Received!"
     message_v = "Hi Shubhendu,\n\n"
     message_v += "You have received a new order!\n\n"
@@ -32,6 +36,8 @@ def send_order_email(order: Order):
     address = f"{order.address}, {order.city}, {order.state}, {order.zip_code}"
     message_v += f"\nShipping Address: {address}\n\n"
     mail_to_v = [settings.VENDOR_EMAIL]
+    print("Mail to vendor created")
+
     message1 = (
         subject_c,
         message_c,
@@ -44,4 +50,6 @@ def send_order_email(order: Order):
         from_mail,
         mail_to_v,
     )
-    send_mass_mail([message1, message2], fail_silently=False)
+    # Sending mails using send_mass_mail()
+    print("Sending mails using mass mail")
+    send_mass_mail((message1, message2), fail_silently=False)  # type: ignore
