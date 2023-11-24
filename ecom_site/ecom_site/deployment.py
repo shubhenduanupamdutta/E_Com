@@ -11,7 +11,7 @@ DEBUG = False
 INSTALLED_APPS = [
     'shop',
     'users',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -20,7 +20,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DATABASES = {
