@@ -1,5 +1,4 @@
-import smtplib
-from email.message import EmailMessage
+from django.core.mail import send_mass_mail
 from django.conf import settings
 from .models import Order
 import json
@@ -52,24 +51,5 @@ def send_order_email(order: Order):
         mail_to_v,
     )
     # Sending mails using send_mass_mail()
-    # print("Sending mails using mass mail")
-    # send_mass_mail((message1, message2), fail_silently=False)  # type: ignore
-
-    # sending mails using smtplib
-    print("Sending mails using smtplib")
-    with smtplib.SMTP(
-            settings.EMAIL_HOST, port=settings.EMAIL_PORT) as connection:
-        connection.starttls()
-        connection.login(settings.EMAIL_HOST_USER,
-                         settings.EMAIL_HOST_PASSWORD)
-        for message in [message1, message2]:
-            msg = EmailMessage()
-            email_body = message[1]
-            msg.set_content(email_body)
-            msg["Subject"] = message[0]
-            msg["To"] = message[3]
-            msg["From"] = message[2]
-            try:
-                connection.send_message(msg)
-            except Exception as e:
-                print(e)
+    print("Sending mails using mass mail")
+    send_mass_mail([message1, message2], fail_silently=False)
