@@ -28,4 +28,4 @@ class Order(models.Model):
     payment_done = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.name} - {self.items}"
+        return f"{self.name}"
