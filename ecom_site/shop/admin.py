@@ -12,6 +12,12 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'price', 'discount_price', 'category']
     list_filter = ['category']
     search_fields = ['title', 'category']
+    actions = ['change_category_to_default']
+
+    def change_category_to_default(self, request, queryset):
+        queryset.update(category="default")
+
+    change_category_to_default.short_description = "Default Category"
 
 
 class OrderAdmin(admin.ModelAdmin):
