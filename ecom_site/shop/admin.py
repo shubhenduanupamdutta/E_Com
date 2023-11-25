@@ -13,6 +13,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['category']
     search_fields = ['title', 'category']
     actions = ['change_category_to_default']
+    # Allowing only some of the fields to be  visible
+    fields = ['title', 'price', 'discount_price', 'category', 'description']
 
     def change_category_to_default(self, request, queryset):
         queryset.update(category="default")
@@ -25,6 +27,8 @@ class OrderAdmin(admin.ModelAdmin):
                     'zip_code', 'created_at', 'total_price', 'payment_done']
     list_filter = ['payment_done', 'created_at']
     search_fields = ['name', 'email', 'city', 'state']
+    # Allowing only some of the fields to be visible
+    fields = ['name', 'items', 'email', 'address', 'city', 'state']
 
 
 admin.site.register(Product, ProductAdmin)
