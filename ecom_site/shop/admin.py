@@ -13,8 +13,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ['category']
     search_fields = ['title', 'category']
     actions = ['change_category_to_default']
-    # Allowing only some of the fields to be  visible
-    fields = ['title', 'price', 'discount_price', 'category', 'description']
     # Allowing fields to be editable from list view
     list_editable = ['price', 'discount_price', 'category']
 
