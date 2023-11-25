@@ -11,12 +11,14 @@ admin.site.index_title = "Manage SomaShubh Shop"
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'price', 'discount_price', 'category']
     list_filter = ['category']
+    search_fields = ['title', 'category']
 
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['name', 'items', 'email', 'address', 'city', 'state',
                     'zip_code', 'created_at', 'total_price', 'payment_done']
     list_filter = ['payment_done', 'created_at']
+    search_fields = ['name', 'email', 'city', 'state']
 
 
 admin.site.register(Product, ProductAdmin)
